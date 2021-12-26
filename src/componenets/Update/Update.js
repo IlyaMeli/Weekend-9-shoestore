@@ -18,8 +18,8 @@ export default class Update extends Component {
 
   render() {
     return (
-      <div class="update-container">
-        <div class="update-content">
+      <div className="update-container">
+        <div className="update-content">
           <label className="name-l">Name:</label>
           <input
             onChange={(e) => this.handleChange("name", e)}

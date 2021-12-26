@@ -19,7 +19,20 @@ class App extends Component {
     }
   };
 
-  handleUpdate = (id, value) => {
+  handleCreate = async () => {
+    let dataCopy = [...this.state.data];
+    const newItem = {
+      name: "random",
+      img_URL:
+        "https://lh3.googleusercontent.com/proxy/pqVYtp2QpzyjY_FA1dATFd_TQyPRCftLqAOsWH8jsh0agM6isgVhi9j13ftmpo76uKBH-utA92aDOI52wwIGlvaFqUC-oewFWII5aiB4Q2fi1oTYWtAXm6_eTsFGtrxk",
+      price: "0",
+    };
+    await dataApi.post("/products/", newItem);
+    dataCopy.push(newItem);
+    this.setState({ data: dataCopy });
+  };
+
+  handleUpdate = async (id, value) => {
     const dataCopy = [...this.state.data];
     let objIdx = dataCopy.findIndex((element) => {
       return element.id === id;
@@ -31,9 +44,9 @@ class App extends Component {
       price: value.price,
     };
     dataCopy[objIdx] = updatedItem;
-    this.setState({ data: dataCopy }, () => {
-      console.log(this.state.data);
-    });
+    await dataApi.put(`/products/${id}`, updatedItem);
+
+    this.setState({ data: dataCopy });
   };
 
   toggleUpdateModal = () => {
@@ -59,9 +72,10 @@ class App extends Component {
     });
   };
 
-  handleDelete = (id) => {
+  handleDelete = async (id) => {
     const { data } = this.state;
     const newData = data.filter((item) => item.id !== id);
+    await dataApi.delete(`/products/${id}`);
     this.setState({ data: newData });
   };
 
@@ -69,7 +83,7 @@ class App extends Component {
     return (
       <div className="container">
         <>
-          <Create />
+          <Create create={this.handleCreate} />
         </>
         {this.state.isLoading ? (
           <h2>LOADING...</h2>

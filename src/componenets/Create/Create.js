@@ -4,7 +4,7 @@ import "./create.css";
 export default class Create extends Component {
   render() {
     return (
-      <div className="create-container">
+      <div onClick={this.props.create} className="create-container">
         <div>Create Product</div>
       </div>
     );

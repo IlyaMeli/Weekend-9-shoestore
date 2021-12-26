@@ -1,0 +1,15 @@
+.create-container {
+  border: solid 1px rgb(189, 189, 189);
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: 0.3s;
+  transform: translateY(0);
+  background-color: rgba(192, 251, 255, 0.445);
+}
+.create-container:hover {
+  background-color: rgba(255, 217, 0, 0.445);
+  transform: translateY(2px);
+}
